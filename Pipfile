@@ -8,6 +8,8 @@ numpy = "1.21"
 rich = "10.12"
 
 [dev-packages]
+black = "*"
+pre-commit = "~=2.13"
 
 [requires]
 python_version = "3.9"
