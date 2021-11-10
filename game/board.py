@@ -32,8 +32,8 @@ class Board:
         if col < 0 or col > 6:
             raise ValueError(f"Column must be in the range 0 <= col < 7")
 
-        t = self.grid[:, col].nonzero()[0]
-        self.grid[len(t), col] = self.turn
+        row = len(self.grid[:, col].nonzero()[0])
+        self.grid[row, col] = self.turn
 
         # TODO: Check if the player has won after inserting this piece
 
