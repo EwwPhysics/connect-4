@@ -10,6 +10,7 @@ rich = "10.12"
 [dev-packages]
 black = "*"
 pre-commit = "~=2.13"
+pytest = "~=6.2"
 
 [requires]
 python_version = "3.9"
