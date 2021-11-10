@@ -47,8 +47,6 @@ def test_win_vertical():
 
     b.add_move(0)
 
-    print(b._grid)
-
     assert b._check_win()
 
 
@@ -63,7 +61,6 @@ def test_win_horizontal():
         b.add_move(i)
 
     b.add_move(3)
-    print(b._grid)
 
     assert b._check_win()
 

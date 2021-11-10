@@ -28,14 +28,13 @@ class Board:
         to switch turns.
 
         Args:
-            col: The column to try to insert a piece at
+            col: The column to try to insert a piece at. Valid values are in the range 0 <= col < 7.
 
         Returns:
-            If a player has won, return `self.turn`
-            Otherwise, return None
+            If a player has won, return `self.turn`. Otherwise, return None
 
         Raises:
-            ValueError: The column was out of bounds, or the column was full.
+            ValueError: The specified column was full.
         """
 
         if col < 0 or col > 6:
@@ -43,7 +42,8 @@ class Board:
 
         row = len(self._grid[:, col].nonzero()[0])
 
-        # TODO: Check if the column is full
+        if row == 6:
+            raise ValueError(f"Column {col} is full")
 
         self._grid[row, col] = self.turn
 
@@ -56,7 +56,7 @@ class Board:
 
     def _check_win(self) -> bool:
         """
-        Check if there is a 4-in-a-row that includes the point (row, col).
+        Check if there is a 4-in-a-row in the grid.
 
         Returns:
             True if there is a 4-in-a-row, false otherwise.
