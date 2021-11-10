@@ -33,6 +33,9 @@ class Board:
             raise ValueError(f"Column must be in the range 0 <= col < 7")
 
         row = len(self.grid[:, col].nonzero()[0])
+
+        # TODO: Check if the column is full
+
         self.grid[row, col] = self.turn
 
         # TODO: Check if the player has won after inserting this piece
