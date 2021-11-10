@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "*"
-rich = "*"
+numpy = "1.21"
+rich = "10.12"
 
 [dev-packages]
 
