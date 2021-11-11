@@ -4,16 +4,7 @@ from scipy.signal import convolve, convolve2d
 from typing import Optional
 
 
-FLAT = np.ones((1, 4), dtype=np.byte)
-DIAG = np.array(
-    [
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1],
-    ],
-    dtype=np.byte,
-)
+KERNEL = np.ones((1, 4), dtype=np.byte)
 
 
 class Board:
@@ -71,20 +62,20 @@ class Board:
             True if there is a 4-in-a-row, false otherwise.
         """
 
-        horizontal = convolve2d(self._grid, FLAT)
+        horizontal = convolve2d(self._grid, KERNEL)
         if abs(horizontal).max() >= 4:
             return True
 
-        vertical = convolve2d(self._grid, np.rot90(FLAT))
+        vertical = convolve2d(self._grid, np.rot90(KERNEL))
         if abs(vertical).max() >= 4:
             return True
 
-        diag = convolve(self._grid, DIAG)
-        if abs(diag).max() >= 4:
+        diag1 = self._grid.diagonal()
+        if abs(diag1).max() >= 4:
             return True
 
-        diag = convolve(self._grid, np.rot90(DIAG))
-        if abs(diag).max() >= 4:
+        diag2 = np.fliplr(self._grid).diagonal()
+        if abs(diag2).max() >= 4:
             return True
 
         return False
