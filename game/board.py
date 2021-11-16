@@ -88,3 +88,8 @@ class Board:
             return True
 
         return False
+    
+    @property
+    def grid(self):
+        return self._grid
+
