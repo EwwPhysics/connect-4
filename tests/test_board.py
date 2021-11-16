@@ -67,22 +67,22 @@ def test_win_horizontal():
 
 def test_win_diagonal():
     # Board state to test
-    #       x
-    #     x o
-    # o x x x
-    # x o o o
+    #        x
+    #      x o
+    #  o x x x
+    #  x o o o
 
     b = board.Board()
-    b.add_move(0)
-    b.add_move(1)
     b.add_move(1)
     b.add_move(2)
     b.add_move(2)
     b.add_move(3)
-    b.add_move(2)
-    b.add_move(0)
     b.add_move(3)
+    b.add_move(4)
     b.add_move(3)
-    b.add_move(3)
+    b.add_move(1)
+    b.add_move(4)
+    b.add_move(4)
+    b.add_move(4)
 
     assert b._check_win()

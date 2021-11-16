@@ -1,10 +1,10 @@
-import numpy as np
-from scipy.signal import convolve, convolve2d
-
 from typing import Optional
 
+import numpy as np
+from scipy.signal import convolve2d
 
-KERNEL = np.ones((1, 4), dtype=np.byte)
+FLAT = np.ones((1, 4), dtype=np.byte)
+DIAG = np.identity(4, dtype=np.byte)
 
 
 class Board:
@@ -62,25 +62,30 @@ class Board:
             True if there is a 4-in-a-row, false otherwise.
         """
 
-        horizontal = convolve2d(self._grid, KERNEL)
+        horizontal = convolve2d(self._grid, FLAT)
         if abs(horizontal).max() >= 4:
             return True
 
-        vertical = convolve2d(self._grid, np.rot90(KERNEL))
+        vertical = convolve2d(self._grid, np.rot90(FLAT))
         if abs(vertical).max() >= 4:
             return True
 
-        diag1 = self._grid.diagonal()
+        diag1 = convolve2d(self._grid, DIAG)
         if abs(diag1).max() >= 4:
             return True
 
-        diag2 = np.fliplr(self._grid).diagonal()
+        diag2 = convolve2d(self._grid, np.fliplr(DIAG))
         if abs(diag2).max() >= 4:
             return True
 
         return False
-    
+
     @property
     def grid(self):
         return self._grid
 
+    def copy(self) -> "Board":
+        b = Board()
+        b._grid = self._grid.copy()
+        b.turn = self.turn
+        return b
