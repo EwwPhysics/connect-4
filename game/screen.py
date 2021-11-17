@@ -1,4 +1,5 @@
 from rich.console import Console
+from rich.prompt import IntPrompt
 from .board import Board
 
 from typing import Optional
@@ -11,8 +12,12 @@ class Screen:
 
     def turn(self) -> Optional[int]:
         self.print_screen()
-        move = self.board.add_move(int(self.console.input("Which column do you want to put your piece in?\n")))
-        return move
+        move = IntPrompt.ask("Which column do you want to put your piece in?\n", choices=list(map(str, range(7))))
+        try:
+            return self.board.add_move(move)
+        except ValueError as e:
+            print(e)
+            return None
 
     def print_screen(self) -> None:
         self.console.rule("Connect 4 Game", style="#FF00FF")
