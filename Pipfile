@@ -6,8 +6,13 @@ name = "pypi"
 [packages]
 numpy = "1.21"
 rich = "10.12"
+scipy = "1.7"
+tensorflow = "2.7"
 
 [dev-packages]
+black = "*"
+pre-commit = "~=2.13"
+pytest = "~=6.2"
 
 [requires]
 python_version = "3.9"
