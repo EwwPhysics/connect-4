@@ -19,11 +19,30 @@ class Screen:
             print(e)
             return None
 
-    def print_screen(self) -> None:
+    def print_screen(self, finished: bool = False) -> None:
+        self.console.rule(style="#FF00FF")
         self.console.rule("Connect 4 Game", style="#FF00FF")
+        self.console.rule(style="#FF00FF")
         print("\n")
         self.print_board()
-        print("\n" * (self.console.size.height - 12))
+
+        if finished == False:
+            if self.board.turn == 1:
+                self.console.print("[red] Red's turn")
+            else:
+                self.console.print("[yellow] Yellow's turn")
+
+            print("\n" * (self.console.size.height - 15))
+        else:
+            print()
+            self.console.print(
+                "::weary_face: Player",
+                "1" if self.board.turn == 1 else "2",
+                "won :weary_face:",
+                justify="center",
+                style="bold red",
+            )
+            print("\n" * (self.console.size.height - 15))
 
     def print_board(self) -> None:
         for x in reversed(self.board.grid):
